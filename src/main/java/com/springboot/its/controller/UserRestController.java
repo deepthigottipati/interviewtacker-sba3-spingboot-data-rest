@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -27,6 +28,7 @@ import com.springboot.its.entity.User;
 import com.springboot.its.exception.UserNotFoundException;
 
 @RestController
+@RequestMapping("/its")
 public class UserRestController {
 
 	@Autowired
@@ -64,11 +66,7 @@ public class UserRestController {
 		userRepository.deleteById(id);
 	}
 
-	//
-	// input - details of user
-	// output - CREATED & Return the created URI
-
-	// HATEOAS
+	
 
 	@PostMapping("/users")
 	public ResponseEntity<Object> createUser(@Valid @RequestBody User user) {
@@ -93,7 +91,7 @@ public class UserRestController {
 	}
 
 
-	@PostMapping("/jpa/users/{id}/interviews")
+	@PostMapping("/users/{id}/interviews")
 	public ResponseEntity<Object> createPost(@PathVariable int id, @RequestBody Interview interview) {
 		
 		Optional<User> userOptional = userRepository.findById(id);

@@ -10,7 +10,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 
@@ -46,10 +50,10 @@ public class User {
 	private String email;
 	
 	@Column(name="mobile")
-	@NotBlank()
-	@Size(min=10,max=10, message="Number should be 10 digits")
+	@NotBlank(message = "Please enter id")
+	@Pattern(regexp="(^$|[0-9]{10})")
 	@ApiModelProperty(notes="Name should be 10 digits")	
-	private BigInteger mobile;	
+	private String mobile;	
 	// define constructors
 	
 	@OneToMany(mappedBy="user")
@@ -59,7 +63,7 @@ public class User {
 		
 	}
 	
-	public User(int id, String firstName, String lastName, String email,BigInteger mobile) {
+	public User(int id, String firstName, String lastName, String email,String mobile) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -68,7 +72,7 @@ public class User {
 	}
 
 
-	public User(String firstName, String lastName, String email,BigInteger mobile) {
+	public User(String firstName, String lastName, String email,String mobile) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -110,11 +114,11 @@ public class User {
 	}
 
 
-	public BigInteger getMobile() {
+	public String getMobile() {
 		return mobile;
 	}
 
-	public void setMobile(BigInteger mobile) {
+	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
 
