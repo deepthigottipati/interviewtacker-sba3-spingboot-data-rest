@@ -19,7 +19,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -53,11 +55,15 @@ public class Interview {
 	@ApiModelProperty(notes="skills should have atleast 5 characters and max of 30")
 	private String userSkills;
 	
+	//@JsonDeserialize(using=CustomerDateAndTimeDeserialize.class)
 	@Column(name="time")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Temporal(TemporalType.TIME)
 	private Date time;	
 	
+	//@JsonDeserialize(using=CustomerDateAndTimeDeserialize.class)
 	@Column(name="date")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	@Temporal(TemporalType.DATE)
 	private Date date;
 	
@@ -78,7 +84,7 @@ public class Interview {
 	 * @JsonIgnore private User user;
 	 */
 	
-	@OneToMany(mappedBy="interview")
+	@OneToMany(mappedBy="interview",cascade=CascadeType.ALL)
 	private List<User> users;
 	
 	/*

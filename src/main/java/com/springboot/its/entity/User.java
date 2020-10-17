@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -28,7 +29,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(description="All details about the user.")
 @Entity
-@Table(name="user")
+@Table(name="user",uniqueConstraints= {@UniqueConstraint(columnNames={"email"})})
 public class User {
 
 	// define fields
@@ -51,7 +52,7 @@ public class User {
 	@ApiModelProperty(notes="Name should have atleast 3 characters and max of 25")
 	private String lastName;
 	
-	@Column(name="email")
+	@Column(name="email",unique=true)
 	@NotBlank()
 	private String email;
 	
@@ -63,7 +64,7 @@ public class User {
 	// define constructors
 	
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false,cascade=CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "interviewid")
 	@JsonIgnore
 	private Interview interview;
