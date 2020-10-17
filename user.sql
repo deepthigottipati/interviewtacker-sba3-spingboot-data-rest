@@ -42,9 +42,9 @@ CREATE TABLE `interview` (
   `interview_status` varchar(45) DEFAULT NULL,
   `remarks` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_INSTRUCTOR_idx` (`instructor_id`),
+  KEY `FK_INSTRUCTOR_idx` (`user_id`),
   
-  CONSTRAINT `FK_INSTRUCTOR` 
+  CONSTRAINT `FK_USER` 
   FOREIGN KEY (`userid`) 
   REFERENCES `user` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;

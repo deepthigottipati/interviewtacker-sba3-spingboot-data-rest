@@ -3,11 +3,15 @@ package com.springboot.its.entity;
 import java.math.BigInteger;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
@@ -17,6 +21,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -32,6 +37,7 @@ public class User {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
 	private int id;
+	
 	
 	
 	@Column(name="first_name")
@@ -56,8 +62,15 @@ public class User {
 	private String mobile;	
 	// define constructors
 	
-	@OneToMany(mappedBy="user")
-	private List<Interview> interviews;
+	
+	@ManyToOne(fetch = FetchType.LAZY, optional = false,cascade=CascadeType.ALL)
+    @JoinColumn(name = "interviewid")
+	@JsonIgnore
+	private Interview interview;
+	
+	/*
+	 * @OneToMany(mappedBy="user") private List<Interview> interviews;
+	 */
 	
 	public User() {
 		
@@ -123,12 +136,19 @@ public class User {
 	}
 
 
-	public List<Interview> getInterviews() {
-		return interviews;
+	/*
+	 * public List<Interview> getInterviews() { return interviews; }
+	 * 
+	 * public void setInterviews(List<Interview> interviews) { this.interviews =
+	 * interviews; }
+	 */
+
+	public Interview getInterview() {
+		return interview;
 	}
 
-	public void setInterviews(List<Interview> interviews) {
-		this.interviews = interviews;
+	public void setInterview(Interview interview) {
+		this.interview = interview;
 	}
 
 	@Override

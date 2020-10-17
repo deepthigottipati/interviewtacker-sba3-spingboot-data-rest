@@ -2,6 +2,7 @@ package com.springboot.its.entity;
 
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -33,6 +35,7 @@ public class Interview {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
 	private int id;
+	
 	
 	
 	@Column(name="interviewer_name")
@@ -75,11 +78,18 @@ public class Interview {
 	 * @JsonIgnore private User user;
 	 */
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false,cascade=CascadeType.ALL)
-    @JoinColumn(name = "userid")
-	@JsonIgnore
-
-    private User user;
+	@OneToMany(mappedBy="interview")
+	private List<User> users;
+	
+	/*
+	 * @ManyToOne(fetch = FetchType.LAZY, optional = false,cascade=CascadeType.ALL)
+	 * 
+	 * @JoinColumn(name = "userid")
+	 * 
+	 * @JsonIgnore
+	 * 
+	 * private User user;
+	 */
 	
 	public Interview() {
 		
@@ -161,12 +171,18 @@ public class Interview {
 		this.remarks = remarks;
 	}
 
-	public User getUser() {
-		return user;
+	/*
+	 * public User getUser() { return user; }
+	 * 
+	 * public void setUser(User user) { this.user = user; }
+	 */
+
+	public List<User> getUsers() {
+		return users;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
 
 	@Override
