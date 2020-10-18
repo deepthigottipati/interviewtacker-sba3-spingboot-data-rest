@@ -27,8 +27,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(description="All details about the Interviews.")
-@Entity
 @Table(name="interview")
+@Entity(name="interview")
 public class Interview {
 
 	// define fields

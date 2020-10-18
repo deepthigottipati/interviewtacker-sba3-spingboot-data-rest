@@ -40,12 +40,14 @@ public class UserRestController {
 		userRestService.deleteUser(id);
 	}
 	
-	@PostMapping("/users")
-	public ResponseEntity<Object> createUser(@Valid @RequestBody User user) {
-		
-		return userRestService.createUser(user);
-
-	}
+	/*
+	 * @PostMapping("/users") public ResponseEntity<Object>
+	 * createUser(@Valid @RequestBody User user) {
+	 * 
+	 * return userRestService.createUser(user);
+	 * 
+	 * }
+	 */
 
 }
 

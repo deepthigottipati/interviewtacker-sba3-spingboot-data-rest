@@ -29,7 +29,8 @@ import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(description="All details about the user.")
 @Entity
-@Table(name="user",uniqueConstraints= {@UniqueConstraint(columnNames={"email"})})
+//@Table(name="user")
+@Table(name="user",uniqueConstraints={@UniqueConstraint(columnNames={"email"})})
 public class User {
 
 	// define fields

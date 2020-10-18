@@ -45,14 +45,17 @@ public class UserRestService {
 		userRepository.deleteById(id);
 	}
 
-	public ResponseEntity<Object> createUser(@Valid @RequestBody User user) {
-		User savedUser = userRepository.save(user);
-
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedUser.getId())
-				.toUri();
-
-		return ResponseEntity.created(location).build();
-
-	}
+	/*
+	 * public ResponseEntity<Object> createUser(@Valid @RequestBody User user) {
+	 * User savedUser = userRepository.save(user);
+	 * 
+	 * URI location =
+	 * ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand
+	 * (savedUser.getId()) .toUri();
+	 * 
+	 * return ResponseEntity.created(location).build();
+	 * 
+	 * }
+	 */
 	
 }
